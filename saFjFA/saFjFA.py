@@ -6,7 +6,7 @@ import sys
 import re
 
 from saFjFA.prawyAhAra_saFjFA import get_letters
-from util import asawwva_cAxi, asawwva_prAxi, UryAxi_gaNa
+from util import asawwva_cAxi, asawwva_prAxi, UryAxi_gaNa, ac, hal
 
 
 def ti(term):
@@ -40,7 +40,14 @@ def upaXA(term):
         upaXA_str = term[-2]
         upaXA_ind = len(term) - 1 - 1
     
-    return upaXA_str, upaXA_ind
+    if term[upaXA_ind] in ac:
+        upaXA_type = term[upaXA_ind] + "xupaXa"
+    elif term[upaXA_ind] in hal:
+        upaXA_type = term[upaXA_ind] + "upaXa"
+    else:
+        upaXA_type = "-"
+    
+    return upaXA_str, upaXA_ind, upaXA_type
 
 
 def is_pluwa(term):

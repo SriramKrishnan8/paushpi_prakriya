@@ -3,8 +3,6 @@
 The following are the constituents:
 1. iw\_saFjFA.py - contains the functions for each of the sUwras that define an iw saFjFA along with the elision function (wasya\_lopaH).
 2. prawyAhAra\_saFjFA.py - contains the functions to generate the letters corresponding to the given prawyAhAra
-2. util.py - contains various lists like ac, hal, XAwus, prawyayas, etc.
-3. test.py - default examples for testing are given. We can also provide our own example.
 
 ## To be done
 

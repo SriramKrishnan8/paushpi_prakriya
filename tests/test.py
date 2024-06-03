@@ -11,7 +11,7 @@ from saFjFA.iw_saFjFA import print_iw
 from saFjFA.prawyAhAra_saFjFA import print_prawyAhAra
 from saFjFA.saFjFA import ti
 from sanXi.sanXi import sanXi_op
-from preprocess.preprocess import step_1
+from preprocess.preprocess import XAwu_operations, paxanirNaya_viXi
 
 
 def test_iw():
@@ -68,8 +68,8 @@ def print_upaXA(term):
     
     from saFjFA.saFjFA import upaXA
     
-    upaXA_str, upaXA_ind = upaXA(term)
-    print(term + " -> " + upaXA_str + "," + str(upaXA_ind))
+    upaXA_str, upaXA_ind, upaXA_type = upaXA(term)
+    print(term + " -> " + upaXA_str + "," + str(upaXA_ind) + "," + upaXA_type)
 
 
 def test_upaXA():
@@ -138,7 +138,7 @@ def print_XAwu_changes(XAwu):
     """ """
     
     print("\nmUla_XAwu: " + XAwu)
-    raw_XAwu = step_1(XAwu)
+    raw_XAwu = XAwu_operations(XAwu)
     print("XAwu: " + raw_XAwu)
 
 
@@ -151,6 +151,22 @@ def test_XAwu_changes():
         print_XAwu_changes(XAwu)
 
 
+def print_paxa(XAwu):
+    """ """
+    
+    paxa = paxanirNaya_viXi(XAwu)
+    print(XAwu + ": " + paxa)
+
+
+def test_paxa():
+    """ """
+    
+    temp_Xawus_list = [ "pac", "yAc", "eX", "As", "paT", "gam" ]
+
+    for XAwu in temp_Xawus_list:
+        print_paxa(XAwu)
+
+
 def main():
     """ """
     
@@ -159,7 +175,7 @@ def main():
         "-t", "--type", default="iw", 
         choices=[
             "iw", "prawyAhAra", "ti", "upaXA", "sanXi",
-            "XAwu_changes",
+            "XAwu_changes", "paxa", 
         ],
         help="what to test?"
     )
@@ -209,6 +225,11 @@ def main():
             print_XAwu_changes(args.own)
         else:
             test_XAwu_changes()
+    elif args.type == "paxa":
+        if args.own:
+            print_paxa(args.own)
+        else:
+            test_paxa()
 
 
 if __name__ == "__main__":

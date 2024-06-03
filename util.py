@@ -87,6 +87,22 @@ avyaya = [
     
 ]
 
+akArAnwa_XAwu = [ "gaNa", "raca", "kaWa", "mqga" ]
+AkArAnwa_XAwu = [ "pA", "lA", "vA", "xA", "XA" ]
+ikArAnwa_XAwu = [ "ji", "Svi", "ci", "ki", "ri" ]
+IkArAnwa_XAwu = [ "nI", "SI", "dI", "krI", "vI" ]
+ukArAnwa_XAwu = [ "xru", "xu", "nu", "gu", "ku", "kRu" ]
+UkArAnwa_XAwu = [ "BU", "lU", "pU", "nU", "mU" ]
+qkArAnwa_XAwu = [ "hq", "Bq", "Xq", "mq", "kq", "svq", "smq" ]
+QkArAnwa_XAwu = [ "jQ", "JQ", "SQ", "gQ", "vQ" ]
+ejanwa_XAwu = [ "mlE", "glE", "Xe", "XyE", "pE" "So", "Co" ]
+
+axupaXa_XAwu = [ "paT", "cal", "vax", "sKal", "kak", "pac", "cat" ]
+ixupaXa_XAwu = [ "ciw", "mix", "Cix", "Bix", "mil" ]
+uxupaXa_XAwu = [ "buX", "SuX", "mux", "kuk", "uK" ]
+qxupaXa_XAwu = [ "kqR", "vqR", "nqw", "Cqx", "vqw", "vqX" ]
+avaSiRta_XAwu = [ "mIl", "SIk", "bukk", "aFc" ]
+
 
 XAwus_list = [ 
     "gamLz", "dukqF", "vaxiz", "FimixAz", "tunaxIz", "FikRvixAz", "tukRu",
@@ -210,3 +226,6 @@ xanwa_oRTa = [ "v" ]
 qkAra_XAwu = [
     "qcCa", "Q", "qX", "QN", "qwi", "q"
 ]
+
+anuxAwwa_iw_XAwus = [ "eX", "As" ]
+svariwa_iw_XAwus = [ "pac", "yAc" ]

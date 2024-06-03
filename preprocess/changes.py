@@ -105,7 +105,7 @@ def numAgama(term, iw_types):
 def upaXAyAM_ca(term):
     """ """
     
-    upaXA_str, upaXA_ind = upaXA(term)
+    upaXA_str, upaXA_ind, upaXA_type = upaXA(term)
     
     i_u_map = { "i" : "I", "u" : "U" }
     
