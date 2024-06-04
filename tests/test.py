@@ -12,6 +12,7 @@ from saFjFA.prawyAhAra_saFjFA import print_prawyAhAra
 from saFjFA.saFjFA import ti
 from sanXi.sanXi import sanXi_op
 from preprocess.preprocess import XAwu_operations, paxanirNaya_viXi
+from upAfga.vikaraNa import get_vikaraNa
 
 
 def test_iw():
@@ -167,6 +168,45 @@ def test_paxa():
         print_paxa(XAwu)
 
 
+def print_vikaraNa(upasarga, XAwu, prawyaya_type, prayoga, gaNa):
+    """ """ 
+
+    res_lst = get_vikaraNa(upasarga, XAwu, prawyaya_type, prayoga, gaNa)
+    upasarga = upasarga or "-"
+    print(upasarga, XAwu, prawyaya_type, prayoga, gaNa)
+    print("\n".join(res_lst))
+
+
+def test_vikaraNa():
+    """ """
+    
+    temp_input_list = [ 
+        ("", "pac", "sArvaXAwuka", "karwari", "BvAxi"),
+        ("", "pac", "sArvaXAwuka", "karmaNi", "BvAxi"),
+        ("", "pac", "sArvaXAwuka", "BAve", "BvAxi"),
+        ("", "pac", "ArXaXAwuka", "karwari", "BvAxi"),
+        ("", "pac", "ArXaXAwuka", "karmaNi", "BvAxi"),
+        ("", "pac", "ArXaXAwuka", "BAve", "BvAxi"),
+        ("vi", "wan", "sArvaXAwuka", "karwari", "wanAxi"),
+        ("vi", "wan", "sArvaXAwuka", "karmaNi", "wanAxi"),
+        ("vi", "wan", "sArvaXAwuka", "BAve", "wanAxi"),
+        ("", "As", "sArvaXAwuka", "karwari", "axAxi"),
+        ("", "hu", "sArvaXAwuka", "karwari", "juhowyAxi"),
+        ("", "xiv", "sArvaXAwuka", "karwari", "xivAxi"),
+        ("", "wux", "sArvaXAwuka", "karwari", "wuxAxi"),
+        ("", "ruX", "sArvaXAwuka", "karwari", "ruXAxi"),
+        ("", "krI", "sArvaXAwuka", "karwari", "kryAxi"),
+        ("", "cur", "sArvaXAwuka", "karwari", "curAxi"),
+        ("", "yas", "sArvaXAwuka", "karwari", "xivAxi"),
+        ("sam", "yas", "sArvaXAwuka", "karwari", "xivAxi"),
+        ("", "swamB", "sArvaXAwuka", "karwari", "wuxAxi"),
+        ("", "Bram", "sArvaXAwuka", "karwari", "BvAxi"),
+    ]
+
+    for input_ in temp_input_list:
+        print_vikaraNa(*input_)
+
+
 def main():
     """ """
     
@@ -175,7 +215,7 @@ def main():
         "-t", "--type", default="iw", 
         choices=[
             "iw", "prawyAhAra", "ti", "upaXA", "sanXi",
-            "XAwu_changes", "paxa", 
+            "XAwu_changes", "paxa", "vikaraNa", 
         ],
         help="what to test?"
     )
@@ -230,6 +270,8 @@ def main():
             print_paxa(args.own)
         else:
             test_paxa()
+    elif args.type == "vikaraNa":
+        test_vikaraNa()
 
 
 if __name__ == "__main__":
