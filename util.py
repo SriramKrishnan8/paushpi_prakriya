@@ -112,18 +112,6 @@ XAwus_list = [
     "nQ", "Nam", "Rvaxaz", "RTA", "RNA", "RvARka", "RTivu", "svaxaz", "Rmif", 
     "RUxaz", "RiXaz", "RiF", "sWA", "swu", 
 ]
-all_prawyayas = [ 
-    "RAkan", "Rtran", "Rvun",
-    "Ra", "Rac", "Rafgavac", "Rikan", "ReNyan", "Rkan", "Rtarac", "RTac", 
-    "RTan", "RTal", "RPak", "Ryaf", "RyaF", "RPa",
-    "kwvA", "wumun",
-    "Sap", "Syan", "gsnu", "Kyun", "KiRNuc", "fi", "GaF", 
-    "suz", "O", "jas", "am", "Ot", "Sas", "tA",
-    "wip", "was", "Ji", "mahi", "tAp",
-    "wasil", "lac", "Gan", "Sas", "ka", "Ka", "gmini", 
-    "Namul", "Sawq", "SAnac", "Snam", "lyut", "kyac",
-    "Nic", 
-]
 
 wip_mas = [
     "wip", "was", "Ji", "sip", "Was", "Wa", "mip", "vas", "mas", 
@@ -146,6 +134,10 @@ sup_prawyayas = [
 
 viBakwi_saFjFA = sup_prawyayas + wif_prawyayas
 
+axanwa_gaNa = [ "BvAxi", "xivAxi", "wuxAxi", "curAxi" ]
+
+xviwva_gaNa = [ "juhowyAxi" ]
+
 niRTA = [ "kwa", "kwavawu" ]
 
 R_prawyayas = [
@@ -157,10 +149,14 @@ waxXiwa_prawyayas = [
     "wasil", "lac", "Gan", "Sas", "ka", "Ka", "gmini", 
 ]
 
-sArvaXAwuka_prawyaya = [
-    "mi", "vaH", "va", "ma", "vahi", "mahi",
-]
+# sArvaXAwuka_prawyaya = [
+#     "mi", "vaH", "va", "ma", "vahi", "mahi",
+# ]
 
+sArvaXAwuka_prawyayas = [
+    "lat", "lot", "laf", "viXilif", 
+    "Sawq", "SAnac", "cAnaS", "SAnan", "KaS", "Sa", "eS", "SaXyE", "SaXyEn", 
+]
 
 
 cAxi = [ "ca", "vA", "ha", "aha", "eva", "evam", "nUnam", "SaSvaw", "yugapaw",
@@ -229,3 +225,16 @@ qkAra_XAwu = [
 
 anuxAwwa_iw_XAwus = [ "eX", "As" ]
 svariwa_iw_XAwus = [ "pac", "yAc" ]
+
+all_prawyayas = [ 
+    "RAkan", "Rtran", "Rvun",
+    "Ra", "Rac", "Rafgavac", "Rikan", "ReNyan", "Rkan", "Rtarac", "RTac", 
+    "RTan", "RTal", "RPak", "Ryaf", "RyaF", "RPa",
+    "kwvA", "wumun",
+    "Sap", "Syan", "gsnu", "Kyun", "KiRNuc", "fi", "GaF", 
+    "suz", "O", "jas", "am", "Ot", "Sas", "tA",
+    "wip", "was", "Ji", "mahi", "tAp",
+    "wasil", "lac", "Gan", "Sas", "ka", "Ka", "gmini", 
+    "Namul", "Sawq", "SAnac", "Snam", "lyut", "kyac",
+    "Nic", 
+] + wif_prawyayas + sup_prawyayas

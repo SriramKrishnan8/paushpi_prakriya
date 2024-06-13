@@ -12,7 +12,7 @@ from saFjFA.prawyAhAra_saFjFA import print_prawyAhAra
 from saFjFA.saFjFA import ti
 from sanXi.sanXi import sanXi_op
 from preprocess.preprocess import XAwu_operations, paxanirNaya_viXi
-from upAfga.vikaraNa import get_vikaraNa
+from upAfga.vikaraNa import insert_vikaraNa
 
 
 def test_iw():
@@ -171,7 +171,7 @@ def test_paxa():
 def print_vikaraNa(upasarga, XAwu, prawyaya_type, prayoga, gaNa):
     """ """ 
 
-    res_lst = get_vikaraNa(upasarga, XAwu, prawyaya_type, prayoga, gaNa)
+    res_lst = insert_vikaraNa(upasarga, XAwu, prawyaya_type, prayoga, gaNa)
     upasarga = upasarga or "-"
     print(upasarga, XAwu, prawyaya_type, prayoga, gaNa)
     print("\n".join(res_lst))
@@ -201,10 +201,64 @@ def test_vikaraNa():
         ("sam", "yas", "sArvaXAwuka", "karwari", "xivAxi"),
         ("", "swamB", "sArvaXAwuka", "karwari", "wuxAxi"),
         ("", "Bram", "sArvaXAwuka", "karwari", "BvAxi"),
+        ("", "BU", "sArvaXAwuka", "karwari", "BvAxi"),
     ]
 
     for input_ in temp_input_list:
         print_vikaraNa(*input_)
+
+
+def print_prakriyA(upasarga, XAwu, gaNa, prayoga, lakAra, paxa):
+    """ """ 
+
+    from prakriyA.prakriyA import generate
+
+    res = generate(upasarga, XAwu, gaNa, prayoga, lakAra, paxa)
+    
+    for e in res:
+        p_e = []
+        for i in e:
+            if type(i) == list:
+                p_e.append(",".join(i))
+            else:
+                p_e.append(i)
+        u = 1 if p_e[0] == "" else 0
+        p_e_str = " + ".join(p_e[u:-1]) + " # " + p_e[-1]
+
+        print(p_e_str)
+
+
+def test_prakriyA():
+    """ """ 
+
+    examples_lat = [
+        ("", "BU", "BvAxi", "karwari", "lat", "parasmEpaxa"),
+        ("", "BU", "BvAxi", "karwari", "lat", "Awmanepaxa"),
+        ("", "yasuz", "xivAxi", "karwari", "lat", "parasmEpaxa"),
+        ("", "yasuz", "xivAxi", "karwari", "lat", "Awmanepaxa"),
+        ("sam", "yasuz", "xivAxi", "karwari", "lat", "parasmEpaxa"),
+        ("sam", "yasuz", "xivAxi", "karwari", "lat", "Awmanepaxa"),
+        ("", "axaz", "axAxi", "karwari", "lat", "parasmEpaxa"),
+        ("", "axaz", "axAxi", "karwari", "lat", "Awmanepaxa"),
+        ("", "cakAsqz", "axAxi", "karwari", "lat", "parasmEpaxa"),
+        ("", "hu", "juhowyAxi", "karwari", "lat", "parasmEpaxa"),
+        ("", "duxAF", "juhowyAxi", "karwari", "lat", "parasmEpaxa"),
+    ]
+
+    examples_laf = [
+        ("", "BU", "BvAxi", "karwari", "laf", "parasmEpaxa"),
+        ("", "BU", "BvAxi", "karwari", "laf", "Awmanepaxa"),
+        ("", "yasuz", "xivAxi", "karwari", "laf", "parasmEpaxa"),
+        ("", "yasuz", "xivAxi", "karwari", "laf", "Awmanepaxa"),
+        ("sam", "yasuz", "xivAxi", "karwari", "laf", "parasmEpaxa"),
+        ("sam", "yasuz", "xivAxi", "karwari", "laf", "Awmanepaxa"),
+        ("", "axaz", "axAxi", "karwari", "laf", "parasmEpaxa"),
+        ("", "axaz", "axAxi", "karwari", "laf", "Awmanepaxa"),
+    ]
+
+    for eg in examples_lat:
+        print("\n" + " ".join(eg))
+        print_prakriyA(*eg)
 
 
 def main():
@@ -215,7 +269,7 @@ def main():
         "-t", "--type", default="iw", 
         choices=[
             "iw", "prawyAhAra", "ti", "upaXA", "sanXi",
-            "XAwu_changes", "paxa", "vikaraNa", 
+            "XAwu_changes", "paxa", "vikaraNa", "prakriyA"
         ],
         help="what to test?"
     )
@@ -272,6 +326,8 @@ def main():
             test_paxa()
     elif args.type == "vikaraNa":
         test_vikaraNa()
+    elif args.type == "prakriyA":
+        test_prakriyA()
 
 
 if __name__ == "__main__":

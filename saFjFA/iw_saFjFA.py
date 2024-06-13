@@ -148,7 +148,15 @@ def cutU(term):
     
     indices = []
     iw_types = []
-    if any([term.startswith(x) for x in (ca_varga + ta_varga)]):
+
+    # This is added so that JoZnwaH is applicable
+    # "prayojanABAvAw JakArasya iw saFjFA na Bavawi"
+    cutU_exceptions = [
+        "Ji", "Ja", 
+    ]
+
+    if not term in cutU_exceptions \
+        and any([term.startswith(x) for x in (ca_varga + ta_varga)]):
         indices = [ 0 ]
         iw_types = [ term[0] + "iw" ]
     

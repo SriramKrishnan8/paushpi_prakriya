@@ -10,7 +10,7 @@ from saFjFA.savarNa import get_savarNa
 from saFjFA.pragqhya_saFjFA import is_pragqhya
 from saFjFA.saFjFA import is_pluwa, is_ekAc
 
-from util import sArvaXAwuka_prawyaya, wa_varga, ca_varga, ta_varga, ka_varga
+from util import sArvaXAwuka_prawyayas, wa_varga, ca_varga, ta_varga, ka_varga
 
 
 ac_sandhi = [
@@ -291,7 +291,7 @@ def sasajuRo_ruH(first, second):
     else:
         res = first + " " + second
         
-    return res
+    return res.strip()
 
 
 def KaravasAnayorvisarjanIyaH(first, second):
@@ -303,9 +303,11 @@ def KaravasAnayorvisarjanIyaH(first, second):
     
     Kar = get_letters("Kar")[0]
     if first[-1] == "r" and (second == "" or second[0] in Kar):
-        res = first[-1] + "H " + second
+        res = first[:-1] + "H " + second
+    else:
+        res = first + " " + second
     
-    return res
+    return res.strip()
     
 
 def haSi_ca(first, second):
@@ -406,7 +408,7 @@ def saH_syArXaXAwuke(first, second):
     
     # saH syArXaXAwuke (7.4.49)
     
-    if first[-1] == "s" and second[0] == "s" and second in ArXaXAwuka_prawyayas:
+    if first[-1] == "s" and second[0] == "s" and second not in sArvaXAwuka_prawyayas:
         res = first[:-1] + "w" + second
     
     return res
@@ -485,3 +487,12 @@ def sanXi_op(first, second):
     # All Sandhi operations go here
     
     return list(set(results))
+
+
+def terminal_sandhi(term):
+    """ """ 
+
+    res = sasajuRo_ruH(term, "")
+    res = KaravasAnayorvisarjanIyaH(res, "")
+
+    return res

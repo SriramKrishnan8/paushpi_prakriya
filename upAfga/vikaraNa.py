@@ -55,12 +55,14 @@ def get_vikaraNa(upasarga, XAwu, prawyaya_type, prayoga, gaNa):
                 # karwari Sap (3.1.68)
                 vikaraNa.append("Sap")
                 # axipraBqwiByaH SapaH (2.4.72)
+                vikaraNa.append("luk")
                 vikaraNa.append("_")
             
             if gaNa == "juhowyAxi":
                 # karwari Sap (3.1.68)
                 vikaraNa.append("Sap")
-                # juhowyAxiByaH SluH (3.1.69)
+                # juhowyAxiByaH SluH (2.4.75)
+                vikaraNa.append("Slu")
                 vikaraNa.append("_")
             
             if gaNa == "xivAxi":
@@ -96,7 +98,7 @@ def get_vikaraNa(upasarga, XAwu, prawyaya_type, prayoga, gaNa):
                 vikaraNa.append("Snam")
             
             if gaNa == "wanAxi":
-                # wanAxikqFByaH SaH (3.1.79)
+                # wanAxikqFByaH uH (3.1.79)
                 vikaraNa.append("u")
             
             if gaNa == "kryAxi":
@@ -114,13 +116,17 @@ def get_vikaraNa(upasarga, XAwu, prawyaya_type, prayoga, gaNa):
         # ArXaXAwuka prawyaye pare
         vikaraNa.append("")
     
+    return vikaraNa
+
+
+def insert_vikaraNa(upasarga, XAwu, prawyaya_type, prayoga, gaNa):
+    """ """ 
+
+    vikaraNa = get_vikaraNa(upasarga, XAwu, prawyaya_type, prayoga, gaNa)
     res = get_res(upasarga, XAwu, vikaraNa)
     
     # eqs = [ upasarga + " + " + XAwu + " + " + vik for vik in vikaraNa ]
     # mod_eqs = [ x.strip() for x in eqs ]
 
     return res
-            
-
-            
 

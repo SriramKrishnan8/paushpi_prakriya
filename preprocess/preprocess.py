@@ -7,7 +7,8 @@ import re
 
 from saFjFA.iw_saFjFA import handle_iw
 from preprocess.changes import XAwu_changes
-from util import anuxAwwa_iw_XAwus, svariwa_iw_XAwus
+from util import anuxAwwa_iw_XAwus, svariwa_iw_XAwus, sArvaXAwuka_prawyayas
+
 
 def XAwu_operations(XAwu):
     """ """ 
@@ -61,3 +62,14 @@ def paxanirNaya_viXi(XAwu):
         paxa = "parasmEpaxa"
     
     return paxa
+
+
+def get_prawyaya_type(lakAra):
+    """ """ 
+
+    prawyaya_type = "ArXaXAwuka"
+    if lakAra in sArvaXAwuka_prawyayas: # Add let with sip condition
+        prawyaya_type = "sArvaXAwuka"
+    
+    return prawyaya_type
+
