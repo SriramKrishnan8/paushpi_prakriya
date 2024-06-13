@@ -94,3 +94,12 @@ At present we have a set of examples where we provide all the necessary informat
 ```
 python3 -m tests.test -t "vikaraNa"
 ```
+
+### Testing (prakriyA)
+
+A sample prakriyA format is created and can be tested on some given examples in tests/test.py. To test it:
+```
+python3 -m tests.test -t "prakriyA"
+```
+
+As of now, the options are fixed in the examples. Soon, provision for users to provide their own examples will be added.
