@@ -7,8 +7,9 @@ import re
 
 from sanXi.sanXi import terminal_sandhi
 from saFjFA.saFjFA import ti
+from saFjFA.iw_saFjFA import handle_iw
 from saFjFA.prawyAhAra_saFjFA import get_letters
-from util import axanwa_gaNa, xviwva_gaNa
+from util import axanwa_gaNa, xviwva_gaNa, fiw_lakAra, hal
 
 
 def is_aByaswa(XAwu, gaNa):
@@ -16,7 +17,7 @@ def is_aByaswa(XAwu, gaNa):
 
     # Paushpi Prakriya does not give the sUwra information regarding 
     # when a dviwwva occurs (i.e., with juhowyAxi gaNa (Slu) results 
-    # in xviwwva)
+    # in xviwwva) - while mentioning about aByaswa in lat-prawyayAxeSa.
     aByaswa = False
     if gaNa == "juhowyAxi":
         # SlO (6.1.90)
@@ -57,7 +58,7 @@ def JoZnwaH(prawyaya):
     return prawyaya
 
 
-def replace_J(XAwu, prawyaya, gaNa, paxa):
+def replace_J_lat(XAwu, prawyaya, gaNa, paxa, lakAra, vikaraNa):
     """ """ 
 
     if is_aByaswa(XAwu, gaNa):
@@ -115,31 +116,237 @@ def WAsaH_se(prawyaya):
     return prawyaya
 
 
-def lat(XAwu, prawyaya, paxa, lakAra, gaNa):
+def lat(XAwu, prawyaya, paxa, lakAra, gaNa, vikaraNa):
     """ """ 
 
-    prawyaya = WAsaH_se(prawyaya)
+    prawyaya_orig = prawyaya
+    
+    prawyaya = handle_iw(prawyaya)[0]
 
-    prawyaya = terminal_sandhi(prawyaya)
+    if prawyaya in [ "wi", "si", "mi"]:
+        # do nothing
+        pass
+    
+    if prawyaya in [ "was", "Was", "vas", "mas" ]:
+        prawyaya = terminal_sandhi(prawyaya)
+    
+    if prawyaya == "Wa":
+        # do nothing
+        pass
 
-    prawyaya = replace_J(XAwu, prawyaya, gaNa, paxa)
+    if prawyaya == "Ji":
+        prawyaya = JoZnwaH(prawyaya)
+    
+    if prawyaya in [ "wa", "Xvam", "i", "vahi", "mahi" ]:
+        prawyaya = tiwa_AwmanepaxAnAM_tere(prawyaya, paxa, lakAra)
+    
+    if prawyaya in [ "AwAm", "AWAm" ]:
+        if gaNa in axanwa_gaNa:
+            prawyaya = Awo_fiwaH(prawyaya, gaNa)
+            prawyaya = lopo_vyorvali(prawyaya)
+        else:
+            pass
+        prawyaya = tiwa_AwmanepaxAnAM_tere(prawyaya, paxa, lakAra)
+    
+    if prawyaya == "WAs":
+        prawyaya = WAsaH_se(prawyaya)
+    
+    if prawyaya == "Ja":
+        if gaNa in axanwa_gaNa:
+            prawyaya = JoZnwaH(prawyaya)
+        else:
+            prawyaya = AwmanepaxeRvanawaH(prawyaya)
+        prawyaya = tiwa_AwmanepaxAnAM_tere(prawyaya, paxa, lakAra)
+    
+    # The following can be clubbed with the previous case but the 
+    # Paushpi Prakriya has provided it as a last condition. 
+    # So we did not move it above. This prevents the entire structure
+    # to be converted into an if-elif-else condition statements.  
+    # Similar issue is there for other lakAras also.  
+    if prawyaya_orig == "Ji":
+        if is_aByaswa(XAwu, gaNa):
+            prawyaya = axaByaswAw(prawyaya_orig)
+    
+    # The above is as prescribed in Paushpi Prakriya.
+    # Alternate procedure is described below.
+    # Both work the same. The difference lies in the abstraction
+    # and sharing of code.  
 
-    prawyaya = Awo_fiwaH(prawyaya, gaNa)
+    # prawyaya = WAsaH_se(prawyaya)
 
-    prawyaya = lopo_vyorvali(prawyaya)
+    # prawyaya = terminal_sandhi(prawyaya)
 
-    prawyaya = tiwa_AwmanepaxAnAM_tere(prawyaya, paxa, lakAra)
+    # prawyaya = replace_J_lat(XAwu, prawyaya, gaNa, paxa, lakAra, vikaraNa)
 
-    # Add conditions for aByaswa rule
+    # prawyaya = Awo_fiwaH(prawyaya, gaNa)
+
+    # prawyaya = lopo_vyorvali(prawyaya)
+
+    # prawyaya = tiwa_AwmanepaxAnAM_tere(prawyaya, paxa, lakAra)
 
     return prawyaya
 
 
-def laf(prawyaya, paxa, lakAra, gaNa):
+def iwaSca(paxa, prawyaya):
+    """ """ 
+
+    # iwaSca (3.4.100)
+    if paxa == "parasmEpaxa" and prawyaya != "mip":
+        k = prawyaya.rfind("i")
+        if k != -1:
+            prawyaya = prawyaya[:k] + prawyaya[k+1:]
+    
+    return prawyaya
+
+
+def wasWasWamipAM_wAnwanwAmaH(paxa, prawyaya):
+    """ """ 
+
+    # wasWasWamipAM_wAnwanwAmaH (3.2.101)
+    map_ = {
+        "was" : "wAm",
+        "Was" : "wam",
+        "Wa" : "wa",
+        "mip" : "am",
+    }
+    if paxa == "parasmEpaxa" and prawyaya in [ "was", "Was", "Wa", "mip" ]:
+        prawyaya = map_.get(prawyaya, prawyaya)
+    
+    return prawyaya
+
+
+def niwyaM_fiwaH(paxa, prawyaya):
+    """ """ 
+
+    # niwyam fiwaH (3.2.99)
+    if paxa == "parasmEpaxa" and prawyaya in [ "vas", "mas" ]:
+        prawyaya = prawyaya.replace("s", "")
+    
+    return prawyaya
+
+
+def sijaByaswavixiByaSca(XAwu, prawyaya, vikaraNa, gaNa):
+    """ """ 
+
+    if "sic" in vikaraNa or XAwu == "vix" or is_aByaswa(XAwu, gaNa):
+        new_prawyaya = "jus"
+        new_prawyaya = handle_iw(new_prawyaya)[0]
+        new_prawyaya = terminal_sandhi(new_prawyaya)
+        # We could have directly assigned "uH" to prawyaya but we 
+        # will not know that we got uH from "jus", which is also 
+        # mentioned in Paushpi Prakriya.  
+        # Temporarily assigned directly as there is some problem
+        # in handling the iw
+        # should jus be added into the list of vibhakti?
+        new_prawyaya = "uH"
+        prawyaya = new_prawyaya # "uH"
+
+
+    return prawyaya
+
+
+def saMyogAnwasya_lopaH(prawyaya):
+    """ """ 
+
+    if len(prawyaya) > 2 and prawyaya[-1] in hal and prawyaya[-2] in hal:
+        prawyaya = prawyaya[:-1]
+    
+    return prawyaya
+
+
+def replace_J_laf(XAwu, prawyaya, gaNa, paxa, vikaraNa):
+    """ """ 
+
+    if is_aByaswa(XAwu, gaNa):
+        prawyaya = sijaByaswavixiByaSca(XAwu, prawyaya, vikaraNa, gaNa)
+    elif paxa == "Awmanepaxa" and not gaNa in axanwa_gaNa:
+        prawyaya = AwmanepaxeRvanawaH(prawyaya)
+    else:
+        prawyaya = JoZnwaH(prawyaya)
+    
+    return prawyaya
+
+
+def laf(XAwu, prawyaya, paxa, lakAra, gaNa, vikaraNa):
     """ """ 
 
     # Add laf conditions
+    prawyaya_orig = prawyaya
+
+    # It is not mentioned in the Paushpi PrakriyA that we 
+    # handle iw, but we are doing it as the next steps
+    # involve both the original prawyayas and also the ones
+    # after handling iw. 
+    prawyaya = handle_iw(prawyaya)[0]
+
+    # parasmEpaxa
+
+    # Here, Paushpi PrakriyA mentions "wi" and "si" instead 
+    # of "wip" and "sip"
+    if prawyaya in [ "wi", "si" ]:
+        prawyaya = iwaSca(paxa, prawyaya)
     
+    if prawyaya == "Ji":
+        prawyaya = JoZnwaH(prawyaya)
+        prawyaya = iwaSca(paxa, prawyaya)
+        prawyaya = saMyogAnwasya_lopaH(prawyaya)
+    
+    # Here the Paushpi prakriyA mentions the original forms 
+    # of the prawyayas
+    if prawyaya_orig in [ "was", "Was", "Wa", "mip" ]:
+        prawyaya = wasWasWamipAM_wAnwanwAmaH(paxa, prawyaya_orig)
+    
+    if prawyaya in [ "vas", "mas" ]:
+        prawyaya = niwyaM_fiwaH(paxa, prawyaya)
+    
+    # Awmanepaxa
+    
+    if prawyaya in [ "wa", "Xvam" ]:
+        # do nothing
+        pass
+    
+    if prawyaya in [ "AwAm", "AWAm" ]:
+        if gaNa in axanwa_gaNa:
+            prawyaya = Awo_fiwaH(prawyaya, gaNa)
+            prawyaya = lopo_vyorvali(prawyaya)
+        else:
+            pass
+    
+    if prawyaya == "Ja":
+        if gaNa in axanwa_gaNa:
+            prawyaya = JoZnwaH(prawyaya)
+        else:
+            prawyaya = AwmanepaxeRvanawaH(prawyaya)
+    
+    if prawyaya_orig == "Ji":
+        if is_aByaswa(XAwu, gaNa):
+            prawyaya = sijaByaswavixiByaSca(XAwu, prawyaya_orig, vikaraNa, gaNa)
+    
+    # This is not mentioned in Paushpi PrakriyA explicitly. 
+    # But the final form has handled the terminal Sandhi. 
+    if prawyaya == "WAs":
+        prawyaya = terminal_sandhi(prawyaya)
+    
+    # The above is as prescribed in Paushpi Prakriya.
+    # Alternate procedure is described below.
+    # Both work the same. The difference lies in the abstraction
+    # and sharing of code.  
+    
+    # prawyaya = replace_J_laf(XAwu, prawyaya, gaNa, paxa, vikaraNa)
+    
+    # prawyaya = iwaSca(paxa, prawyaya)
+
+    # if paxa == "parasmEpaxa":
+    #     prawyaya = wasWasWamipAM_wAnwanwAmaH(paxa, prawyaya_orig)
+    #     prawyaya = niwyaM_fiwaH(paxa, prawyaya)
+    # elif paxa == "Awmanepaxa":
+    #     prawyaya = Awo_fiwaH(prawyaya, gaNa)
+    #     prawyaya = lopo_vyorvali(prawyaya)
+    
+    # prawyaya = saMyogAnwasya_lopaH(prawyaya)
+
+    # prawyaya = terminal_sandhi(prawyaya)
+
     return prawyaya
 
 
@@ -163,15 +370,15 @@ def viXilif(prawyaya, paxa, lakAra, gaNa):
     return prawyaya
 
 
-def prawyaya_Axesa(XAwu, prawyaya, paxa, lakAra, gaNa):
+def prawyaya_Axesa(XAwu, prawyaya, paxa, lakAra, gaNa, vikaraNa):
     """ """ 
 
     if lakAra == "lat":
-        prawyaya = lat(XAwu, prawyaya, paxa, lakAra, gaNa)
+        prawyaya = lat(XAwu, prawyaya, paxa, lakAra, gaNa, vikaraNa)
     elif lakAra == "lot":
         prawyaya = lot(prawyaya, paxa, lakAra, gaNa)
     elif lakAra == "laf":
-        prawyaya = laf(prawyaya, paxa, lakAra, gaNa)
+        prawyaya = laf(XAwu, prawyaya, paxa, lakAra, gaNa, vikaraNa)
     elif lakAra == "viXilif":
         prawyaya = viXilif(prawyaya, paxa, lakAra, gaNa)
     else:

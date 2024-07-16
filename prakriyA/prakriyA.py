@@ -69,7 +69,6 @@ def generate(upasarga, XAwu, gaNa, prayoga, lakAra, paxa):
 
     # lakAra assignment
     lakAra_sUwra = assign_lakAra(lakAra)
-    print(lakAra_sUwra)
     res.append((upasarga, XAwu, gaNa, lakAra, lakAra_sUwra))
     
     # lasya (3.4.77)
@@ -89,12 +88,8 @@ def generate(upasarga, XAwu, gaNa, prayoga, lakAra, paxa):
     vikarana_res = get_vikaraNa(upasarga, XAwu, prawyaya_type, prayoga, gaNa)
     res.append((upasarga, XAwu, vikarana_res, wif_prawyayas, prawyaya_type, "vikaraNa"))
 
-    # iw 
-    iw_wif_prawyayas = [ handle_iw(p)[0] for p in wif_prawyayas ]
-    res.append((upasarga, XAwu, vikarana_res, iw_wif_prawyayas, prawyaya_type, "wif-iw"))
-
     # change ending s and r to H for the wif prawyayas
-    wif_terminal_sandhi = [ prawyaya_Axesa(XAwu, wif, paxa, lakAra, gaNa) for wif in iw_wif_prawyayas ]
+    wif_terminal_sandhi = [ prawyaya_Axesa(XAwu, wif, paxa, lakAra, gaNa, vikarana_res) for wif in wif_prawyayas ]
     res.append((upasarga, XAwu, vikarana_res, wif_terminal_sandhi, prawyaya_type, "wif-prawyayAxeSa"))
 
     # Next steps to be added...

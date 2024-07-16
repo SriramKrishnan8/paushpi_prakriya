@@ -241,8 +241,11 @@ def test_prakriyA():
         ("", "axaz", "axAxi", "karwari", "lat", "parasmEpaxa"),
         ("", "axaz", "axAxi", "karwari", "lat", "Awmanepaxa"),
         ("", "cakAsqz", "axAxi", "karwari", "lat", "parasmEpaxa"),
+        ("", "cakAsqz", "axAxi", "karwari", "lat", "Awmanepaxa"),
         ("", "hu", "juhowyAxi", "karwari", "lat", "parasmEpaxa"),
+        ("", "hu", "juhowyAxi", "karwari", "lat", "Awmanepaxa"),
         ("", "duxAF", "juhowyAxi", "karwari", "lat", "parasmEpaxa"),
+        ("", "duxAF", "juhowyAxi", "karwari", "lat", "Awmanepaxa"),
     ]
 
     examples_laf = [
@@ -254,9 +257,11 @@ def test_prakriyA():
         ("sam", "yasuz", "xivAxi", "karwari", "laf", "Awmanepaxa"),
         ("", "axaz", "axAxi", "karwari", "laf", "parasmEpaxa"),
         ("", "axaz", "axAxi", "karwari", "laf", "Awmanepaxa"),
+        ("", "hu", "juhowyAxi", "karwari", "laf", "parasmEpaxa"),
+        ("", "hu", "juhowyAxi", "karwari", "laf", "Awmanepaxa"),
     ]
 
-    for eg in examples_lat:
+    for eg in examples_lat + examples_laf:
         print("\n" + " ".join(eg))
         print_prakriyA(*eg)
 
@@ -311,7 +316,7 @@ def main():
     elif args.type == "sanXi":
         if args.first or args.second:
             test_sandhi(args.first, args.second)
-#            print("Please provide the two terms to be sandhied")
+            # print("Please provide the two terms to be sandhied")
         else:
             test_sandhi_examples()
     elif args.type == "XAwu_changes":

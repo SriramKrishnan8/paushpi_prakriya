@@ -237,4 +237,9 @@ all_prawyayas = [
     "wasil", "lac", "Gan", "Sas", "ka", "Ka", "gmini", 
     "Namul", "Sawq", "SAnac", "Snam", "lyut", "kyac",
     "Nic", 
+    "jus", 
 ] + wif_prawyayas + sup_prawyayas
+
+tiw_lakAra = [ "lat", "lot", "lit", "lqt", "lut", "let" ]
+fiw_lakAra = [ "laf", "lqf", "luf", "viXilif", "ASIrlif" ]
+lakAra = tiw_lakAra + fiw_lakAra
