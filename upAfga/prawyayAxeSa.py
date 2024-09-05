@@ -350,12 +350,166 @@ def laf(XAwu, prawyaya, paxa, lakAra, gaNa, vikaraNa):
     return prawyaya
 
 
-def lot(prawyaya, paxa, lakAra, gaNa):
+def eruH(prawyaya):
+    """ 3.4.86 """
+
+    prawyaya = prawyaya.replace("i", "u")
+    
+    return prawyaya
+
+
+def merniH(prawyaya):
+    """ 3.4.89 """
+
+    prawyaya = prawyaya.replace("mi", "ni")
+    
+    return prawyaya
+
+
+def Afuwwamasya_picca(prawyaya):
+    """ 3.4.92 """
+
+    prawyaya = "A" + prawyaya
+    
+    return prawyaya
+
+
+def serhyapicca(prawyaya):
+    """ 3.4.87 """
+
+    prawyaya = prawyaya.replace("si", "hi")
+    
+    return prawyaya
+
+
+def awo_heH(prawyaya):
+    """ 6.4.105 """
+
+    prawyaya = "_"
+    
+    return prawyaya
+
+
+def AmewaH(prawyaya):
+    """ 3.4.90 """
+
+    prawyaya = prawyaya.replace("e", "Am")
+
+    return prawyaya
+
+
+def savAByAm_vAmO(prawyaya):
+    """ 3.4.91 """
+
+    prawyaya = prawyaya.replace("se", "sva")
+    prawyaya = prawyaya.replace("Xve", "xvam")
+
+    return prawyaya
+
+
+def ewe_E(prawyaya):
+    """ 3.4.93 """
+
+    prawyaya = prawyaya.replace("e", "E")
+
+    return prawyaya
+
+
+def lot(XAwu, prawyaya, paxa, lakAra, gaNa):
     """ """ 
 
     # Add lot conditions
+    prawyaya_orig = prawyaya
 
-    # Add conditions for aByaswa rule
+    # parasmEpaxa - wip, was Ji, sip, Was, Wa, mip, vas, mas
+    # Awmanepaxa - wa, AwAm, Ja, WAs, AWAm, Xvam, it, vahi, mahif
+
+    # It is not mentioned in the Paushpi PrakriyA that we 
+    # handle iw, but we are doing it as the next steps
+    # involve both the original prawyayas and also those 
+    # after handling iw. 
+    prawyaya = handle_iw(prawyaya)[0]
+
+    # parasmEpaxa - wi, was, Ji, si, Was, Wa, mi, vas mas
+
+    if prawyaya == "Ji":
+        # This condition is presented at the end in Paushpi Prakriya 
+        # We have inserted it here
+        if is_aByaswa(XAwu, gaNa):
+            prawyaya = axaByaswAw(prawyaya)
+        else:
+            prawyaya = JoZnwaH(prawyaya)
+
+    if prawyaya in [ "wi", "anwi", "awi" ]:
+        prawyaya = eruH(prawyaya)
+    
+    if prawyaya == "mi":
+        prawyaya = merniH(prawyaya)
+
+    if prawyaya in [ "vas", "mas" ]:
+        prawyaya = niwyaM_fiwaH(paxa, prawyaya)
+    
+    if prawyaya in [ "ni", "va", "ma" ]:
+        prawyaya = Afuwwamasya_picca(prawyaya)
+    
+    # mip is not considered here as it is already handled before
+    if prawyaya_orig in [ "was", "Was", "Wa" ]:
+        prawyaya = wasWasWamipAM_wAnwanwAmaH(paxa, prawyaya_orig)
+    
+    if prawyaya == "si":
+        prawyaya = serhyapicca(prawyaya)
+
+    if prawyaya == "hi":
+        if gaNa in axanwa_gaNa:
+            prawyaya = awo_heH(prawyaya)
+    
+    if prawyaya in [ "wu", "_", "hi" ]:
+        prawyaya = prawyaya + "/" + "wAw"
+    
+    # Awmanepaxa - wa, AwAm, Ja, WAs, AWAm, Xvam, i, vahi, mahi
+
+    # Add logic for tiwa_AwmanepaxAnAM_tere - not provided in 
+    # Paushpi Prakriya
+    # This is not specified in Paushpi Prakriya but has 
+    # to be understood from lat
+    if prawyaya in [ "wa", "AwAm", "Ja", "AWAm", "Xvam", "i", "vahi", "mahi" ]:
+        prawyaya = tiwa_AwmanepaxAnAM_tere(prawyaya, paxa, lakAra)
+    
+    if prawyaya in [ "Awe", "AWe" ]:
+        if gaNa in axanwa_gaNa:
+            prawyaya = Awo_fiwaH(prawyaya, gaNa)
+            prawyaya = lopo_vyorvali(prawyaya)
+        else:
+            pass
+        prawyaya = tiwa_AwmanepaxAnAM_tere(prawyaya, paxa, lakAra)
+    
+    if prawyaya == "WAs":
+        prawyaya = WAsaH_se(prawyaya)
+    
+    if prawyaya == "Je":
+        if gaNa in axanwa_gaNa:
+            prawyaya = JoZnwaH(prawyaya)
+        else:
+            prawyaya = AwmanepaxeRvanawaH(prawyaya)
+        prawyaya = tiwa_AwmanepaxAnAM_tere(prawyaya, paxa, lakAra)
+    
+    if prawyaya in [ "we", "iwe", "anwe", "iWe", "awe" ]:
+        prawyaya = AmewaH(prawyaya)
+    
+    if prawyaya_orig in [ "AwAm", "AWAm" ]:
+        if gaNa in axanwa_gaNa:
+            pass
+        else:
+            prawyaya = prawyaya_orig
+
+    if prawyaya in [ "se", "Xve" ]:
+        prawyaya = savAByAm_vAmO(prawyaya)
+    
+    if prawyaya in [ "e", "vahe", "mahe" ]:
+        prawyaya = ewe_E(prawyaya)
+        
+    if prawyaya in [ "vahE", "mahE" ]:
+        prawyaya = Afuwwamasya_picca(prawyaya)
 
     return prawyaya
 
@@ -376,7 +530,7 @@ def prawyaya_Axesa(XAwu, prawyaya, paxa, lakAra, gaNa, vikaraNa):
     if lakAra == "lat":
         prawyaya = lat(XAwu, prawyaya, paxa, lakAra, gaNa, vikaraNa)
     elif lakAra == "lot":
-        prawyaya = lot(prawyaya, paxa, lakAra, gaNa)
+        prawyaya = lot(XAwu, prawyaya, paxa, lakAra, gaNa)
     elif lakAra == "laf":
         prawyaya = laf(XAwu, prawyaya, paxa, lakAra, gaNa, vikaraNa)
     elif lakAra == "viXilif":

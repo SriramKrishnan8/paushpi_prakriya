@@ -232,36 +232,49 @@ def test_prakriyA():
     """ """
 
     examples_lat = [
-        ("", "BU", "BvAxi", "karwari", "lat", "parasmEpaxa"),
-        ("", "BU", "BvAxi", "karwari", "lat", "Awmanepaxa"),
-        ("", "yasuz", "xivAxi", "karwari", "lat", "parasmEpaxa"),
-        ("", "yasuz", "xivAxi", "karwari", "lat", "Awmanepaxa"),
-        ("sam", "yasuz", "xivAxi", "karwari", "lat", "parasmEpaxa"),
-        ("sam", "yasuz", "xivAxi", "karwari", "lat", "Awmanepaxa"),
-        ("", "axaz", "axAxi", "karwari", "lat", "parasmEpaxa"),
-        ("", "axaz", "axAxi", "karwari", "lat", "Awmanepaxa"),
-        ("", "cakAsqz", "axAxi", "karwari", "lat", "parasmEpaxa"),
-        ("", "cakAsqz", "axAxi", "karwari", "lat", "Awmanepaxa"),
-        ("", "hu", "juhowyAxi", "karwari", "lat", "parasmEpaxa"),
-        ("", "hu", "juhowyAxi", "karwari", "lat", "Awmanepaxa"),
-        ("", "duxAF", "juhowyAxi", "karwari", "lat", "parasmEpaxa"),
-        ("", "duxAF", "juhowyAxi", "karwari", "lat", "Awmanepaxa"),
+        # ("", "BU", "BvAxi", "karwari", "lat", "parasmEpaxa"),
+        # ("", "BU", "BvAxi", "karwari", "lat", "Awmanepaxa"),
+        # ("", "yasuz", "xivAxi", "karwari", "lat", "parasmEpaxa"),
+        # ("", "yasuz", "xivAxi", "karwari", "lat", "Awmanepaxa"),
+        # ("sam", "yasuz", "xivAxi", "karwari", "lat", "parasmEpaxa"),
+        # ("sam", "yasuz", "xivAxi", "karwari", "lat", "Awmanepaxa"),
+        # ("", "axaz", "axAxi", "karwari", "lat", "parasmEpaxa"),
+        # ("", "axaz", "axAxi", "karwari", "lat", "Awmanepaxa"),
+        # ("", "cakAsqz", "axAxi", "karwari", "lat", "parasmEpaxa"),
+        # ("", "cakAsqz", "axAxi", "karwari", "lat", "Awmanepaxa"),
+        # ("", "hu", "juhowyAxi", "karwari", "lat", "parasmEpaxa"),
+        # ("", "hu", "juhowyAxi", "karwari", "lat", "Awmanepaxa"),
+        # ("", "duxAF", "juhowyAxi", "karwari", "lat", "parasmEpaxa"),
+        # ("", "duxAF", "juhowyAxi", "karwari", "lat", "Awmanepaxa"),
+        ("", "paTaz", "BvAxi", "karwari", "lat", "parasmEpaxa"),
+        ("", "paTaz", "BvAxi", "karwari", "lat", "Awmanepaxa"),
     ]
 
     examples_laf = [
-        ("", "BU", "BvAxi", "karwari", "laf", "parasmEpaxa"),
-        ("", "BU", "BvAxi", "karwari", "laf", "Awmanepaxa"),
-        ("", "yasuz", "xivAxi", "karwari", "laf", "parasmEpaxa"),
-        ("", "yasuz", "xivAxi", "karwari", "laf", "Awmanepaxa"),
-        ("sam", "yasuz", "xivAxi", "karwari", "laf", "parasmEpaxa"),
-        ("sam", "yasuz", "xivAxi", "karwari", "laf", "Awmanepaxa"),
-        ("", "axaz", "axAxi", "karwari", "laf", "parasmEpaxa"),
-        ("", "axaz", "axAxi", "karwari", "laf", "Awmanepaxa"),
-        ("", "hu", "juhowyAxi", "karwari", "laf", "parasmEpaxa"),
-        ("", "hu", "juhowyAxi", "karwari", "laf", "Awmanepaxa"),
+        # ("", "BU", "BvAxi", "karwari", "laf", "parasmEpaxa"),
+        # ("", "BU", "BvAxi", "karwari", "laf", "Awmanepaxa"),
+        # ("", "yasuz", "xivAxi", "karwari", "laf", "parasmEpaxa"),
+        # ("", "yasuz", "xivAxi", "karwari", "laf", "Awmanepaxa"),
+        # ("sam", "yasuz", "xivAxi", "karwari", "laf", "parasmEpaxa"),
+        # ("sam", "yasuz", "xivAxi", "karwari", "laf", "Awmanepaxa"),
+        # ("", "axaz", "axAxi", "karwari", "laf", "parasmEpaxa"),
+        # ("", "axaz", "axAxi", "karwari", "laf", "Awmanepaxa"),
+        # ("", "hu", "juhowyAxi", "karwari", "laf", "parasmEpaxa"),
+        # ("", "hu", "juhowyAxi", "karwari", "laf", "Awmanepaxa"),
+        ("", "paTaz", "BvAxi", "karwari", "laf", "parasmEpaxa"),
+        ("", "paTaz", "BvAxi", "karwari", "laf", "Awmanepaxa"),
     ]
 
-    for eg in examples_lat + examples_laf:
+    examples_lot = [
+        ("", "paTaz", "BvAxi", "karwari", "lot", "parasmEpaxa"),
+        ("", "paTaz", "BvAxi", "karwari", "lot", "Awmanepaxa"),
+        # ("", "axaz", "axAxi", "karwari", "lot", "parasmEpaxa"),
+        # ("", "axaz", "axAxi", "karwari", "lot", "Awmanepaxa"),
+        # ("", "hu", "juhowyAxi", "karwari", "lot", "parasmEpaxa"),
+        # ("", "hu", "juhowyAxi", "karwari", "lot", "Awmanepaxa"),
+    ]
+
+    for eg in examples_lat + examples_laf + examples_lot:
         print("\n" + " ".join(eg))
         print_prakriyA(*eg)
 

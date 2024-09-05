@@ -122,7 +122,7 @@ def ac_op(first, second):
         res = first + "Z" + second[1:]
     if (is_pragqhya(first) or is_pluwa(first)) and s in ac:
         res = first + " " + second
-    if f == "a" and second in sArvaXAwuka_prawyaya:
+    if f == "a" and second in sArvaXAwuka_prawyayas:
         res = first[:-1] + "A" + second
     
     return [ res ]
@@ -284,7 +284,7 @@ def sasajuRo_ruH(first, second):
     
     # sasajuRo ruH (8.2.66)
     
-    # how to check if first paxa
+    # how to check if first is paxa?
     
     if first[-1] == "s" and second == "":
         res = first[:-1] + "r"
@@ -324,6 +324,18 @@ def haSi_ca(first, second):
     return res
     
 
+jaS_for_Jal = {
+    "k" : "g", "K" : "g", "g" : "g", "G" : "g",
+    "c" : "j", "C" : "j", "j" : "j", "J" : "j",
+    "t" : "d", "T" : "d", "d" : "d", "D" : "d",
+    "w" : "x", "W" : "x", "x" : "x", "X" : "x",
+    "p" : "b", "P" : "b", "b" : "b", "B" : "b",
+    "R" : "d", "s" : "x",
+    "S" : "j", # Here due to the sUwra vraScaBrasj... (8.2.36),
+    # S becomes R, and because of RNAnwAH Rat, it becomes d
+}
+
+
 def JalAM_jaS_JaSi(first, second):
     """ """ 
     
@@ -331,16 +343,6 @@ def JalAM_jaS_JaSi(first, second):
     
     Jal = get_letters("Jal")[0]
     JaS = get_letters("JaS")[0]
-    jaS_for_Jal = {
-        "k" : "g", "K" : "g", "g" : "g", "G" : "g",
-        "c" : "j", "C" : "j", "j" : "j", "J" : "j",
-        "t" : "d", "T" : "d", "d" : "d", "D" : "d",
-        "w" : "x", "W" : "x", "x" : "x", "X" : "x",
-        "p" : "b", "P" : "b", "b" : "b", "B" : "b",
-        "R" : "d", "s" : "x",
-        "S" : "j", # Here due to the sUwra vraScaBrasj... (8.2.36),
-        # S becomes R, and because of RNAnwAH Rat, it becomes d
-    }
     
     if first[-1] in Jal and second and second[0] in JaS:
         res = first[:-1] + jaS_for_Jal.get(first[-1], first[-1]) + second
