@@ -274,7 +274,16 @@ def test_prakriyA():
         # ("", "hu", "juhowyAxi", "karwari", "lot", "Awmanepaxa"),
     ]
 
-    for eg in examples_lat + examples_laf + examples_lot:
+    examples_viXilif = [
+        ("", "paTaz", "BvAxi", "karwari", "viXilif", "parasmEpaxa"),
+        ("", "paTaz", "BvAxi", "karwari", "viXilif", "Awmanepaxa"),
+        # ("", "axaz", "axAxi", "karwari", "lot", "parasmEpaxa"),
+        # ("", "axaz", "axAxi", "karwari", "lot", "Awmanepaxa"),
+        # ("", "hu", "juhowyAxi", "karwari", "lot", "parasmEpaxa"),
+        # ("", "hu", "juhowyAxi", "karwari", "lot", "Awmanepaxa"),
+    ]
+
+    for eg in examples_viXilif:
         print("\n" + " ".join(eg))
         print_prakriyA(*eg)
 
